@@ -11,9 +11,14 @@
     <link rel="stylesheet" href="css/style.css" />
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <link href='https://unpkg.com/boxicons@2.1.2/dist/boxicons.js'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-        integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+    <link rel="manifest" href="petstore.webmanifest">
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js')
+        }
+    </script>
 </head>
 
 <body>
@@ -23,9 +28,7 @@
             <!-- Container wrapper -->
             <div class="container-fluid">
                 <!-- Toggle button -->
-                <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
-                    data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fas fa-bars"></i>
                 </button>
 
@@ -63,13 +66,11 @@
                     <div class="col-lg-2">
                         <div class="still">
                             <div class="form-check">
-                                <input class="form-check-input" value="Ascending" type="radio" id="ascending"
-                                    v-model="lowHigh" />
+                                <input class="form-check-input" value="Ascending" type="radio" id="ascending" v-model="lowHigh" />
                                 <label class="form-check-label" for="ascending">Ascending</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" value="Descending" type="radio" id="descending"
-                                    v-model="lowHigh" />
+                                <input class="form-check-input" value="Descending" type="radio" id="descending" v-model="lowHigh" />
                                 <label class="form-check-label" for="descending">Descending</label>
                             </div>
                         </div>
@@ -79,15 +80,12 @@
                             <div class="row">
                                 <div class="col-md-8 mb-2">
                                     <div class="form-group">
-                                        <input type="text" v-model="searchInput" v-on:input="searchFilter"
-                                            class="form-control p-2 ps-3 rounded-0 shadow-0 form-control-lg form-control-a"
-                                            placeholder="Search Lesson">
+                                        <input type="text" v-model="searchInput" v-on:input="searchFilter" class="form-control p-2 ps-3 rounded-0 shadow-0 form-control-lg form-control-a" placeholder="Search Lesson">
                                     </div>
                                 </div>
                                 <div class="col-md-4 mb-2">
                                     <div class="form-group">
-                                        <select name="sortBy" v-model="sortBy" v-on:change="filterLessons"
-                                            class="form-control p-2 bg-white ps-3 form-select rounded-0 shadow-0 form-control-a form-control-lg">
+                                        <select name="sortBy" v-model="sortBy" v-on:change="filterLessons" class="form-control p-2 bg-white ps-3 form-select rounded-0 shadow-0 form-control-a form-control-lg">
                                             <option value="">--Sort By--</option>
                                             <option value="price">Price</option>
                                             <option value="location">Location</option>
@@ -118,8 +116,7 @@
                                                     </p>
                                                 </div>
                                                 <div class="col-6 d-flex justify-content-end">
-                                                    <button type="button" class="btn main-color btn-floating"
-                                                        v-on:click="addToCart(lesson)" :disabled="lesson.stock < 1">
+                                                    <button type="button" class="btn main-color btn-floating" v-on:click="addToCart(lesson)" :disabled="lesson.stock < 1">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                             style="fill: rgb(238, 237, 237);">
                                                             <path
@@ -180,8 +177,7 @@
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-outline mb-3 border mt-4">
-                                        <input type="text" id="form5Example1" v-model="firstName"
-                                            class="form-control" />
+                                        <input type="text" id="form5Example1" v-model="firstName" class="form-control" />
                                         <label class="form-label" for="form5Example1">Firstname</label>
                                     </div>
                                 </div>
@@ -194,8 +190,7 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="form-outline mb-4 border">
-                                        <input type="number" id="form5Example2" v-model="phoneNumber"
-                                            class="form-control" />
+                                        <input type="number" id="form5Example2" v-model="phoneNumber" class="form-control" />
                                         <label class="form-label" for="form5Example2">Phone Number</label>
                                     </div>
                                 </div>
@@ -216,8 +211,7 @@
                                             <p class="mb-0">Price: ${{lesson.price}}</p>
                                             <p class="mb-0">Amount: ${{lesson.stock}}</p>
 
-                                            <button class="btn btn-danger"
-                                                v-on:click="removeCartItem(lesson.id, lesson.stock)"><small>Remove</small></button>
+                                            <button class="btn btn-danger" v-on:click="removeCartItem(lesson.id, lesson.stock)"><small>Remove</small></button>
                                         </div>
                                     </div>
                                     <div class="image">
@@ -242,7 +236,7 @@
     <script type="text/javascript" src="js/main.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
-      </script>
+    </script>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
 
